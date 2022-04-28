@@ -5,9 +5,11 @@ import '../css/app.css'
 
 function App() {
 
+  const [recipes, setRecipes] = useState(sampleRecipes);
+
   return (
 
-    <RecipeList recipes={sampleRecipes} />
+    <RecipeList recipes={recipes} />
   )
 }
 
