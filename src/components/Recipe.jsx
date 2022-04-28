@@ -15,6 +15,8 @@ export default function Recipe(props) {
     ingredients,
   } = props;
 
+
+  
   return (
     <div className="recipe">
       <div className='recipe__header'>
