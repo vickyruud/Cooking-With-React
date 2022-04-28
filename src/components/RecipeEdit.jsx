@@ -1,7 +1,7 @@
 import React from 'react';
 import RecipeIngredientEdit from './RecipeIngredientEdit';
 
-export default function RecipeEdit() {
+export default function RecipeEdit({recipe}) {
   return (
     <div className='recipe-edit'>
       <div className='recipe-edit__remove-button-container'>
@@ -18,6 +18,7 @@ export default function RecipeEdit() {
           type='text'
           name='name'
           id='name'
+          value={recipe.name}
           className='recipe-edit__input'/>
         <label
           htmlFor='cookTime'
@@ -28,6 +29,8 @@ export default function RecipeEdit() {
           type='text'
           name='cookTime'
           id='cookTime'
+          value={recipe.cookTime}
+
           className='recipe-edit__input'/>
          <label
           htmlFor='servings'
@@ -39,7 +42,9 @@ export default function RecipeEdit() {
           min='1'
           name='servings'
           id='servings'
-          className='recipe-edit__input'/>
+          className='recipe-edit__input'
+          value={recipe.servings}
+        />
         <label
           htmlFor='instructions'
           className='recipe-edit__label'>
@@ -48,7 +53,10 @@ export default function RecipeEdit() {
         <textarea
           name='instructions'
           className='recipe-edit__input'
-          id='instructions' />
+          id='instructions'          
+        >
+          {recipe.instructions}
+        </textarea>
       </div>
       <br />
       <label className='recipe-edit__label'>Ingredients</label>
@@ -56,8 +64,14 @@ export default function RecipeEdit() {
         <div>Name</div>
         <div>Amount</div>
         <div></div>
-        <RecipeIngredientEdit />
-        <RecipeIngredientEdit />
+        {recipe.ingredients.map(ingredient => {
+          return (
+            <RecipeIngredientEdit
+              key={ingredient.id}
+              ingredient={ingredient}
+            />
+          )
+        })}
       </div>
       <div className='recipe-edit__add-ingredient-btn-container'>
         <button className='btn btn--primary'>Add Ingredient</button>

@@ -8,7 +8,10 @@ export const RecipeContext = React.createContext()
 const LOCAL_STORAGE_KEY = 'cookingWithReact.recipes'
 
 function App() {
-  const [recipes, setRecipes] = useState(sampleRecipes)
+  const [recipes, setRecipes] = useState(sampleRecipes);
+  const [selectedRecipeId, setSelectedRecipesId] = useState();
+  const selectedRecipe = recipes.find(recipe => recipe.id === selectedRecipeId);
+
 
   useEffect(() => {
     const recipeJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -21,7 +24,8 @@ function App() {
 
   const recipeContextValue = {
     handleRecipeAdd,
-    handleRecipeDelete
+    handleRecipeDelete,
+    handleRecipeSelect
   }
 
   function handleRecipeAdd() {
@@ -43,10 +47,14 @@ function App() {
     setRecipes(recipes.filter(recipe => recipe.id !== id))
   }
 
+  function handleRecipeSelect(id) {
+    setSelectedRecipesId(id);
+  }
+
   return (
     <RecipeContext.Provider value={recipeContextValue}>
       <RecipeList recipes={recipes} />
-      <RecipeEdit/>
+      { selectedRecipe && <RecipeEdit recipe={selectedRecipe} /> }
     </RecipeContext.Provider>
   )
 }
