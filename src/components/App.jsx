@@ -24,7 +24,11 @@ function App() {
     ]
   }
     setRecipes([...recipes, newRecipe]);
-}
+  }
+  
+  const handleRecipeDelete = (id) => {
+    setRecipes(recipes.filter(recipe => recipe.id !== id))
+  }
   
 
   return (
@@ -32,6 +36,7 @@ function App() {
     <RecipeList
       recipes={recipes}
       handleRecipeAdd={handleRecipeAdd}
+      handleRecipeDelete={handleRecipeDelete}
     />
   )
 }
